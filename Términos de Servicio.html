@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos de Servicio - ImpulsaTuDigital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        .terms-container {
+            max-width: 1000px;
+            margin: 120px auto 50px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .terms-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .terms-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .last-updated {
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        .terms-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .terms-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+
+        .terms-text {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .terms-list {
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .terms-list li {
+            margin-bottom: 0.8rem;
+            color: #cccccc;
+            position: relative;
+        }
+
+        .terms-list li::marker {
+            color: #4ecdc4;
+        }
+
+        .highlight {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #4ecdc4;
+            font-weight: 500;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(78, 205, 196, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #cccccc;
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #4ecdc4;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .mobile-menu.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .mobile-menu.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
+            .terms-title {
+                font-size: 2.5rem;
+            }
+            
+            .terms-content {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .terms-title {
+                font-size: 2rem;
+            }
+            
+            .terms-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ImpulsaTuDigital</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="index.html#precios">Precios</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Terms Content -->
+    <main class="terms-container">
+        <header class="terms-header">
+            <h1 class="terms-title">Términos de Servicio</h1>
+            <p class="last-updated">Última actualización: 15 de junio, 2024</p>
+        </header>
+        
+        <div class="terms-content">
+            <section class="terms-section">
+                <p class="terms-text">Bienvenido a ImpulsaTuDigital. Al acceder y utilizar nuestros servicios, usted acepta cumplir con los siguientes términos y condiciones. Por favor, léalos cuidadosamente.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">1. Definiciones</h2>
+                <p class="terms-text">En estos Términos de Servicio:</p>
+                <ul class="terms-list">
+                    <li><span class="highlight">"Servicio"</span> se refiere a los servicios de desarrollo web, gestión de reseñas y redes sociales ofrecidos por ImpulsaTuDigital.</li>
+                    <li><span class="highlight">"Cliente"</span> es la persona o entidad que contrata nuestros servicios.</li>
+                    <li><span class="highlight">"Contenido"</span> incluye todo material proporcionado por el Cliente para su uso en nuestros servicios.</li>
+                </ul>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">2. Uso del Servicio</h2>
+                <p class="terms-text">2.1. Usted acepta utilizar nuestros servicios únicamente para fines legales y de acuerdo con estos Términos.</p>
+                <p class="terms-text">2.2. Es responsabilidad del Cliente proporcionar información precisa y completa para la ejecución del servicio.</p>
+                <p class="terms-text">2.3. Nos reservamos el derecho de rechazar cualquier proyecto que consideremos inapropiado o ilegal.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">3. Propiedad Intelectual</h2>
+                <p class="terms-text">3.1. Todo el contenido proporcionado por el Cliente sigue siendo de su propiedad exclusiva.</p>
+                <p class="terms-text">3.2. Los derechos de propiedad intelectual del código fuente y diseños creados por ImpulsaTuDigital serán transferidos al Cliente una vez completado el pago total.</p>
+                <p class="terms-text">3.3. Nos reservamos el derecho de mostrar el trabajo realizado en nuestro portafolio, a menos que se acuerde lo contrario por escrito.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">4. Pagos y Facturación</h2>
+                <p class="terms-text">4.1. Los precios de nuestros servicios se establecen en nuestras tarifas vigentes al momento del pedido.</p>
+                <p class="terms-text">4.2. Se requiere un depósito del 50% para iniciar cualquier proyecto, salvo acuerdo distinto.</p>
+                <p class="terms-text">4.3. El saldo restante debe pagarse antes de la entrega final del proyecto.</p>
+                <p class="terms-text">4.4. Los pagos atrasados pueden resultar en la suspensión del servicio.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">5. Cancelaciones y Reembolsos</h2>
+                <p class="terms-text">5.1. El Cliente puede cancelar el servicio en cualquier momento mediante notificación por escrito.</p>
+                <p class="terms-text">5.2. En caso de cancelación por parte del Cliente:</p>
+                <ul class="terms-list">
+                    <li>Se retendrá el depósito inicial para cubrir el trabajo realizado hasta la fecha de cancelación.</li>
+                    <li>Si el trabajo realizado excede el valor del depósito, se facturará el excedente.</li>
+                </ul>
+                <p class="terms-text">5.3. No ofrecemos reembolsos por servicios ya prestados o entregables completados.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">6. Limitación de Responsabilidad</h2>
+                <p class="terms-text">6.1. ImpulsaTuDigital no será responsable por:</p>
+                <ul class="terms-list">
+                    <li>Daños indirectos, incidentales o consecuentes resultantes del uso de nuestros servicios.</li>
+                    <li>Interrupciones del servicio debido a factores fuera de nuestro control.</li>
+                    <li>Contenido proporcionado por el Cliente que infrinja derechos de terceros.</li>
+                </ul>
+                <p class="terms-text">6.2. Nuestra responsabilidad máxima en cualquier caso será limitada al monto total pagado por el Cliente por los servicios en cuestión.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">7. Confidencialidad</h2>
+                <p class="terms-text">7.1. Ambas partes acuerdan mantener confidencial toda información sensible compartida durante la prestación del servicio.</p>
+                <p class="terms-text">7.2. Esta obligación de confidencialidad permanecerá vigente incluso después de la terminación del servicio.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">8. Modificaciones</h2>
+                <p class="terms-text">8.1. Nos reservamos el derecho de modificar estos Términos en cualquier momento.</p>
+                <p class="terms-text">8.2. Las modificaciones entrarán en vigor inmediatamente después de su publicación en nuestro sitio web.</p>
+                <p class="terms-text">8.3. El uso continuado del servicio después de dichas modificaciones constituye su aceptación de los nuevos términos.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">9. Ley Aplicable</h2>
+                <p class="terms-text">Estos Términos se regirán e interpretarán de acuerdo con las leyes del país donde ImpulsaTuDigital tiene su sede principal.</p>
+            </section>
+            
+            <section class="terms-section">
+                <h2 class="section-title">10. Contacto</h2>
+                <p class="terms-text">Para cualquier pregunta sobre estos Términos de Servicio, por favor contáctenos a través de nuestro sitio web o en la dirección de correo electrónico: <span class="highlight">legal@impulsatudigital.com</span></p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ImpulsaTuDigital</h3>
+                <p>Especialistas en desarrollo web profesional, gestión de reseñas y estrategias digitales efectivas.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="LinkedIn">💼</a>
+                    <a href="#" title="Twitter">🐦</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="#">Desarrollo Web</a></li>
+                    <li><a href="#">Gestión de Reseñas</a></li>
+                    <li><a href="#">Redes Sociales</a></li>
+                    <li><a href="#">SEO</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Política de Cookies</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📍 Calle Digital 123<br>Ciudad Tecnológica, CP 12345</p>
+                <p>📞 +1 (555) 123-4567</p>
+                <p>✉️ info@impulsatudigital.com</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 ImpulsaTuDigital. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Floating particles animation
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random animation delay
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                
+                // Random size
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                particles.appendChild(particle);
+            }
+        }
+
+        // Initialize particles when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
