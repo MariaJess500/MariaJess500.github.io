@@ -3,394 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonios Premium - ImpulsaTuDigital</title>
+    <title>Testimonios - ImpulsaTuDigital</title>
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
-            --secondary-gradient: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
-            --dark-bg: #0f0f1a;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --text-light: #ffffff;
-            --text-muted: #b8b8d1;
-            --accent-color: #8E54E9;
-            --accent-secondary: #4776E6;
-        }
-
-        .testimonials-premium {
-            padding: 120px 0;
-            background: var(--dark-bg);
+        /* Estilos generales (consistentes con el resto del sitio) */
+        .testimonials {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             position: relative;
-            overflow: hidden;
         }
-
-        .testimonials-premium::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(110,72,170,0.1) 0%, rgba(15,15,26,0) 70%);
-            z-index: 0;
-        }
-
-        .testimonials-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary-gradient);
-            border-radius: 4px;
-        }
-
-        .section-subtitle {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonial-card::before {
+        
+        .testimonials::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(110,72,170,0.05) 0%, rgba(15,15,26,0) 100%);
-            z-index: -1;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23333" stroke-width="0.5" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
         }
-
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative;
+        }
+        
         .testimonial-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            border-color: rgba(142, 84, 233, 0.3);
+            border-color: rgba(78, 205, 196, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-
-        .testimonial-card.featured {
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 20px 50px rgba(142, 84, 233, 0.2);
-        }
-
-        .featured-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--primary-gradient);
-            color: white;
-            padding: 8px 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            border-radius: 50px;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(110,72,170,0.3);
-        }
-
-        .testimonial-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            margin-bottom: 30px;
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .testimonial-content::before {
+        
+        .testimonial-card::before {
             content: '"';
             position: absolute;
-            left: 0;
-            top: -10px;
-            font-size: 3rem;
-            color: var(--accent-color);
-            opacity: 0.3;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.05);
             font-family: Georgia, serif;
             line-height: 1;
+            z-index: 0;
         }
-
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: #ffffff;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
         .testimonial-rating {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 25px;
-        }
-
-        .star {
             color: #FFD700;
+            margin-bottom: 1.5rem;
             font-size: 1.2rem;
+            letter-spacing: 2px;
         }
-
-        .author-info {
+        
+        .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 1.5rem;
         }
-
+        
         .author-avatar {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--accent-color);
-            box-shadow: 0 5px 15px rgba(142, 84, 233, 0.3);
+            border: 2px solid #4ecdc4;
         }
-
-        .author-details h4 {
-            color: var(--text-light);
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            font-weight: 600;
+        
+        .author-info h4 {
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+            font-size: 1.1rem;
         }
-
-        .author-details p {
-            color: var(--accent-color);
+        
+        .author-info p {
+            color: #4ecdc4;
             font-size: 0.9rem;
             font-weight: 500;
         }
-
-        .company-logo {
-            width: 80px;
-            height: auto;
-            opacity: 0.8;
-            margin-left: auto;
-        }
-
+        
         .testimonials-cta {
             text-align: center;
-            margin-top: 60px;
+            margin-top: 4rem;
         }
-
-        .cta-button {
+        
+        .testimonials-cta .cta-button {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 18px 40px;
-            background: var(--primary-gradient);
+            gap: 0.8rem;
+            padding: 16px 32px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
             border: none;
             border-radius: 50px;
             color: white;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 15px 40px rgba(110,72,170,0.4);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4);
         }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.6s;
+        
+        .testimonials-cta .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(78, 205, 196, 0.6);
         }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(110,72,170,0.6);
-        }
-
-        .floating-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            filter: blur(40px);
-        }
-
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-color);
-            top: 10%;
-            left: 5%;
-            animation: float 12s ease-in-out infinite;
-        }
-
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--accent-secondary);
-            bottom: 15%;
-            right: 10%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(20px, 30px) rotate(10deg); }
-        }
-
-        @media (max-width: 992px) {
+        
+        /* Responsive */
+        @media (max-width: 768px) {
             .testimonials-grid {
                 grid-template-columns: 1fr;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .testimonials-premium {
-                padding: 80px 0;
             }
             
             .testimonial-card {
-                padding: 30px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1rem;
+                padding: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sección de Testimonios Premium -->
-    <section class="testimonials-premium">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-        </div>
-        
+    <!-- Sección de Testimonios -->
+    <section class="testimonials">
         <div class="testimonials-container">
-            <div class="section-header">
-                <h2 class="section-title">Testimonios Exclusivos</h2>
-                <p class="section-subtitle">Descubre por qué las empresas más innovadoras eligen ImpulsaTuDigital para transformar su presencia digital.</p>
-            </div>
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-subtitle" style="text-align: center; color: #cccccc; max-width: 700px; margin: 0 auto 3rem;">Más de 150 empresas han confiado en nosotros para impulsar su presencia digital. Estas son algunas de sus experiencias.</p>
             
             <div class="testimonials-grid">
-                <!-- Testimonio Destacado -->
-                <div class="testimonial-card featured">
-                    <div class="featured-badge">Destacado</div>
-                    <div class="testimonial-rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="testimonial-content">"ImpulsaTuDigital revolucionó nuestro e-commerce. En solo 3 meses, nuestro tráfico orgánico aumentó un 120% y las conversiones un 65%. Su enfoque estratégico combinado con un diseño excepcional superó todas nuestras expectativas."</p>
-                    <div class="author-info">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Elena Rodríguez" class="author-avatar">
-                        <div class="author-details">
-                            <h4>Elena Rodríguez</h4>
-                            <p>Directora de Marketing, TechGlobal</p>
+                <!-- Testimonio 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-content">"ImpulsaTuDigital transformó completamente nuestra presencia en línea. Nuestro nuevo sitio web ha aumentado las conversiones en un 40% y el tráfico orgánico en un 75%. El equipo fue profesional en todo momento."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="María González" class="author-avatar">
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>CEO, Moda Elegante</p>
                         </div>
-                        <img src="https://via.placeholder.com/80x30/6e48aa/ffffff?text=TechGlobal" alt="TechGlobal" class="company-logo">
                     </div>
                 </div>
                 
                 <!-- Testimonio 2 -->
                 <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="testimonial-content">"El equipo de ImpulsaTuDigital demostró un profundo conocimiento técnico y creativo. Nuestra nueva plataforma corporativa ha recibido elogios de clientes y socios por igual, estableciendo un nuevo estándar en nuestra industria."</p>
-                    <div class="author-info">
-                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Mendez" class="author-avatar">
-                        <div class="author-details">
-                            <h4>Carlos Méndez</h4>
-                            <p>CEO, Consultoría Estratégica</p>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-content">"El equipo de ImpulsaTuDigital superó todas nuestras expectativas. No solo crearon un sitio web impresionante, sino que también nos ayudaron a desarrollar una estrategia digital completa que ha duplicado nuestras ventas online."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Mendoza" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Carlos Mendoza</h4>
+                            <p>Director, Consultoría Financiera</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Testimonio 3 -->
                 <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                    <p class="testimonial-content">"Como startup, necesitábamos un socio digital que entendiera nuestra visión. ImpulsaTuDigital no solo captó nuestra esencia, sino que la elevó con soluciones innovadoras que han sido clave para nuestra rápida expansión."</p>
-                    <div class="author-info">
-                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Ana López" class="author-avatar">
-                        <div class="author-details">
-                            <h4>Ana López</h4>
-                            <p>Fundadora, GreenStart</p>
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-content">"Como pequeña empresa, necesitábamos un sitio web impactante pero con un presupuesto limitado. ImpulsaTuDigital logró exactamente eso y más. ¡Altamente recomendados!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura Jiménez" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Laura Jiménez</h4>
+                            <p>Fundadora, Boutique Artesanal</p>
                         </div>
-                        <img src="https://via.placeholder.com/80x30/4776E6/ffffff?text=GreenStart" alt="GreenStart" class="company-logo">
                     </div>
                 </div>
             </div>
             
+            <!-- CTA -->
             <div class="testimonials-cta">
                 <a href="#contacto" class="cta-button">
                     <span>Únete a nuestros clientes satisfechos</span>
